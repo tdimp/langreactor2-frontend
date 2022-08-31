@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 
-const Home = () => {
+const Home = ({ currentUser }) => {
+
   return (
-    <div>Welcome to LangReactor!</div>
+    <div>{currentUser ? `Welcome to LangReactor, ${currentUser}!` : "Welcome to LangReactor! Please log in or sign up." }</div>
   )
 }
 
