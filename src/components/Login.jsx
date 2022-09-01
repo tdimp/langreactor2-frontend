@@ -30,7 +30,7 @@ const Login = ({ setCurrentUser }) => {
 
     const data = await response.json();
     if (response.ok) {
-      setCurrentUser(user.username);
+      setCurrentUser(user);
       navigate('/');
     } else {
       setErrors(data.error.login)

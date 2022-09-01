@@ -20,7 +20,7 @@ export default function App() {
     fetch('/auth')
     .then(res => {
       if(res.ok){
-        res.json().then(user => loginUser(user.username));
+        res.json().then(user => loginUser(user));
       }
     });
   }, [])
@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <Router>
-      <NavBar loggedIn={loggedIn} />
+      <NavBar currentUser={currentUser} />
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} />} />
         <Route path="/signup" element={<SignUp />} />
