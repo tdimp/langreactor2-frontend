@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Login = ({ authenticate }) => {
+const Login = ({ setCurrentUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
+
+  const reroute = () => {
+    let path = '/signup';
+    navigate(path);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +30,7 @@ const Login = ({ authenticate }) => {
 
     const data = await response.json();
     if (response.ok) {
-      authenticate(user.username);
+      setCurrentUser(user.username);
       navigate('/');
     } else {
       setErrors(data.error.login)
@@ -48,6 +53,8 @@ const Login = ({ authenticate }) => {
         <input type="password" required={true} value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
       <input type="submit" value="Log In!" />
+      <h4>Don't have an account?</h4>
+      <button onClick={reroute}>Sign Up</button>
       </form>
     </div>
   )
