@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import DecksPage from "./components/DecksPage";
 
 export default function App() {
@@ -18,24 +19,21 @@ export default function App() {
 
   useEffect(() => {
     fetch('/auth')
-    .then(res => {
-      if(res.ok){
-        res.json().then(user => loginUser(user));
-      }
-    });
+      .then(res => {
+       if(res.ok){
+         res.json().then(user => loginUser(user));
+        }
+      });
   }, [])
-
-  //if(!currentUser) {
-  //  return(<Login setCurrentUser={setCurrentUser} />)
-  //}
 
   return (
     <Router>
       <NavBar currentUser={currentUser} />
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp loginUser={loginUser} />} />
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
+        <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
         <Route path="/decks" element={<DecksPage />} />
       </Routes>
     </Router>

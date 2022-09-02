@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+const SignUp = ({ loginUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [primaryLanguage, setPrimaryLanguage] = useState("");
@@ -31,6 +31,7 @@ const SignUp = () => {
 
     const data = await response.json();
     if (response.ok) {
+      loginUser(data)
       navigate('/');
     } else {
       setErrors(data.error)
