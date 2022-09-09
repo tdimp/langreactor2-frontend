@@ -15,7 +15,7 @@ const DecksPage = () => {
       {decks.map(deck => (
       <h3 key={deck.id}>{deck.name}</h3>
       
-    ))} </div>
+    ))}</div>
   )
 }
 
