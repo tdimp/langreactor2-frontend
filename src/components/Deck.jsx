@@ -10,7 +10,7 @@ const Deck = () => {
     fetch(`/decks/${id}`)
     .then(res => res.json())
     .then(cards => setCards(cards))
-  })
+  }, [])
 
   return (
     <div>
