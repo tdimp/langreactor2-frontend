@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import DecksPage from "./components/DecksPage";
+import Deck from "./components/Deck";
 
 export default function App() {
 
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
         <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
         <Route path="/decks" element={<DecksPage />} />
+        <Route path="/decks/:id" element={<Deck />} />
       </Routes>
     </Router>
   );

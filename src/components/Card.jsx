@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Card = () => {
+const Card = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlipClick = () => {
@@ -9,7 +9,7 @@ const Card = () => {
 
   return (
     <div>
-      {isFlipped ? <h1>Hello</h1> : <h1>Hola</h1>}
+      {isFlipped ? <h1>{card.primary_lang_txt}</h1> : <h1>{card.foreign_lang_txt}</h1>}
       <button onClick={handleFlipClick}>Flip!</button>
     </div>
   )

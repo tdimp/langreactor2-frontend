@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const DecksPage = () => {
 
@@ -10,10 +11,14 @@ const DecksPage = () => {
       .then(decks => setDecks(decks))
   }, [])
 
+  decks.forEach(deck => {
+    console.log(deck.cards)
+  })
+
   return (
     <div>
       {decks.map(deck => (
-      <h3 key={deck.id}>{deck.name}</h3>
+      <Link to={`/decks/${deck.id}`} key={deck.id}>{deck.name}</Link>
       
     ))}</div>
   )
