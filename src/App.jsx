@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import DecksPage from "./components/DecksPage";
 import Deck from "./components/Deck";
+import NewCardForm from "./components/NewCardForm";
 
 export default function App() {
 
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
         <Route path="/decks" element={<DecksPage />} />
         <Route path="/decks/:id" element={<Deck />} />
+        <Route path="/cards/new" element={<NewCardForm />} />
       </Routes>
     </Router>
   );

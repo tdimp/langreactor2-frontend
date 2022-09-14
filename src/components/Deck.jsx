@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Card from './Card';
 
 const Deck = () => {
   const [cards, setCards] = useState([]);
   const { id } = useParams();
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/decks/${id}`)
@@ -12,8 +14,14 @@ const Deck = () => {
     .then(cards => setCards(cards))
   }, [])
 
+  const reroute = () => {
+    const path = '/cards/new';
+    navigate(path);
+  }
+
   return (
     <div>
+      <button onClick={reroute}>Create New Card</button>
       {cards.map(card => {
         return (
           <Card key={card.id} card={card} />
