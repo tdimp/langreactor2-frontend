@@ -15,7 +15,7 @@ const Deck = () => {
   }, [])
 
   const reroute = () => {
-    const path = '/cards/new';
+    const path = `/cards/new`;
     navigate(path);
   }
 

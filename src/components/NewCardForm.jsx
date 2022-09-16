@@ -5,13 +5,15 @@ const NewCardForm = () => {
   const [foreignLangTxt, setForeignLangTxt] = useState("");
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [deckId, setDeckId] = useState(0);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
       foreign_lang_txt: foreignLangTxt,
       primary_lang_txt: primaryLangTxt,
-      img_url: imgUrl
+      img_url: imgUrl,
+      deck_id: deckId
     }
     const response = await fetch("/cards", {
       method: "POST", 
@@ -25,7 +27,7 @@ const NewCardForm = () => {
     if (response.ok) {
       alert("Card created!")
     } else {
-      alert(data.errors)
+      console.log(data)
     }
   }
 
@@ -43,9 +45,9 @@ const NewCardForm = () => {
         <label>Image URL <br />
         <input type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} />
         </label>
-        <select>
-          <option>Hi</option>
-          <option>HI2</option>
+        <select value={deckId} onChange={(e) => setDeckId(e.target.value)}>
+          <option>1</option>
+          <option>2</option>
         </select>
         <input type="submit" value="Create Card" />
       </form>
