@@ -38,7 +38,7 @@ export default function App() {
         <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
         <Route path="/decks" element={<DecksPage />} />
         <Route path="/decks/:id" element={<Deck />} />
-        <Route path="/cards/new" element={<NewCardForm />} />
+        <Route path="/decks/:id/new" element={<NewCardForm />} />
       </Routes>
     </Router>
   );

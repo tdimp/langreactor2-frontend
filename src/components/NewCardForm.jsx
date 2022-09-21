@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const NewCardForm = () => {
 
@@ -6,14 +6,22 @@ const NewCardForm = () => {
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [deckId, setDeckId] = useState(0);
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    fetch("/decks")
+    .then(res => res.json())
+    .then(data => setDecks(data))
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
       foreign_lang_txt: foreignLangTxt,
       primary_lang_txt: primaryLangTxt,
-      img_url: imgUrl,
+      img_url: imgUrl      
     }
+    console.log(cardData)
     const response = await fetch("/cards", {
       method: "POST", 
       headers: {
@@ -29,7 +37,7 @@ const NewCardForm = () => {
       console.log(data)
     }
   }
-
+  console.log(deckId)
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -45,8 +53,7 @@ const NewCardForm = () => {
         <input type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} />
         </label>
         <select value={deckId} onChange={(e) => setDeckId(e.target.value)}>
-          <option>1</option>
-          <option>2</option>
+          {decks.map(deck => <option key={deck.id}>{deck.name}</option>)}
         </select>
         <input type="submit" value="Create Card" />
       </form>
