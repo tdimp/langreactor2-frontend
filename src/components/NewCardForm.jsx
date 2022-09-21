@@ -13,7 +13,6 @@ const NewCardForm = () => {
       foreign_lang_txt: foreignLangTxt,
       primary_lang_txt: primaryLangTxt,
       img_url: imgUrl,
-      deck_id: deckId
     }
     const response = await fetch("/cards", {
       method: "POST", 
