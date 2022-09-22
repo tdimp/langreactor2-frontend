@@ -5,7 +5,7 @@ const NewCardForm = () => {
   const [foreignLangTxt, setForeignLangTxt] = useState("");
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState(0);
+  const [deckId, setDeckId] = useState(1);
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
@@ -16,18 +16,23 @@ const NewCardForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const cardData = {
-      foreign_lang_txt: foreignLangTxt,
-      primary_lang_txt: primaryLangTxt,
-      img_url: imgUrl      
+    const clientData = {
+      cardData: {
+        foreign_lang_txt: foreignLangTxt,
+        primary_lang_txt: primaryLangTxt,
+        img_url: imgUrl,
+      },
+      deckData: {
+        deck_id: parseInt(deckId)
+      }
     }
-    console.log(cardData)
+    console.log(clientData)
     const response = await fetch("/cards", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(cardData),
+      body: JSON.stringify(clientData),
     });
 
     const data = await response.json();
@@ -37,7 +42,7 @@ const NewCardForm = () => {
       console.log(data)
     }
   }
-  console.log(deckId)
+  console.log(parseInt(deckId))
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -53,7 +58,7 @@ const NewCardForm = () => {
         <input type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} />
         </label>
         <select value={deckId} onChange={(e) => setDeckId(e.target.value)}>
-          {decks.map(deck => <option key={deck.id}>{deck.name}</option>)}
+          {decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
         </select>
         <input type="submit" value="Create Card" />
       </form>
