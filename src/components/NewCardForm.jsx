@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NewCardForm = () => {
 
@@ -7,6 +8,8 @@ const NewCardForm = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [deckId, setDeckId] = useState(1);
   const [decks, setDecks] = useState([]);
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/decks")
@@ -34,11 +37,12 @@ const NewCardForm = () => {
     const data = await response.json();
     if (response.ok) {
       alert("Card created!")
+      navigate(`/decks/${deckId}`)
     } else {
       console.log(data)
     }
   }
-  console.log(parseInt(deckId))
+
   return (
     <div>
       <form onSubmit={onSubmit}>
