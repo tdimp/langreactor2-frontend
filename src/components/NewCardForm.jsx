@@ -16,23 +16,19 @@ const NewCardForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const clientData = {
-      cardData: {
-        foreign_lang_txt: foreignLangTxt,
-        primary_lang_txt: primaryLangTxt,
-        img_url: imgUrl,
-      },
-      deckData: {
-        deck_id: parseInt(deckId)
-      }
+    const cardData = {
+      foreign_lang_txt: foreignLangTxt,
+      primary_lang_txt: primaryLangTxt,
+      img_url: imgUrl,
+      deck_id: parseInt(deckId)
     }
-    console.log(clientData)
+  
     const response = await fetch("/cards", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(clientData),
+      body: JSON.stringify(cardData),
     });
 
     const data = await response.json();
