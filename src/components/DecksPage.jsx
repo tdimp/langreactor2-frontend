@@ -9,11 +9,7 @@ const DecksPage = () => {
     fetch("/decks") 
       .then((res) => res.json())
       .then(decks => setDecks(decks))
-  }, [])
-
-  decks.forEach(deck => {
-    console.log(deck.cards)
-  })
+  }, []);
 
   return (
     <div>
