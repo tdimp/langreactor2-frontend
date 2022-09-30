@@ -50,8 +50,8 @@ const NewCardForm = () => {
         <input type="text" required={true} value={foreignLangTxt} onChange={(e) => setForeignLangTxt(e.target.value)} />
         </label>
         <br />
-        <label>Primary Language Text <br />
-        <input type="text" value={primaryLangTxt} onChange={(e) => setPrimaryLangTxt(e.target.value)} />
+        <label>Primary Language Text* <br />
+        <input type="text" required={true} value={primaryLangTxt} onChange={(e) => setPrimaryLangTxt(e.target.value)} />
         </label>
         <br />
         <label>Image URL <br />

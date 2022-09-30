@@ -14,14 +14,20 @@ const Deck = () => {
     .then(cards => setCards(cards))
   }, [])
 
-  const reroute = () => {
+  const routeToCreateCardForm = () => {
     const path = `/cards/new`;
+    navigate(path);
+  };
+
+  const routeToStudyDeck = () => {
+    const path = `/deck/${id}/study`;
     navigate(path);
   }
 
   return (
     <div>
-      <button onClick={reroute}>Create New Card</button>
+      <button onClick={routeToCreateCardForm}>Create New Card</button>
+      <button onClick={routeToStudyDeck}>Study Deck</button>
       {cards.map(card => {
         return (
           <Card key={card.id} card={card} />
