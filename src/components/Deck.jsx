@@ -20,7 +20,7 @@ const Deck = () => {
   };
 
   const routeToStudyDeck = () => {
-    const path = `/deck/${id}/study`;
+    const path = `/decks/${id}/study`;
     navigate(path);
   }
 
