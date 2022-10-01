@@ -13,18 +13,13 @@ const StudyDeck = () => {
     fetch(`/decks/${id}`)
     .then(res => res.json())
     .then(data => setDeck(data))
-  }, [studyCard])
+  }, [])
 
-  const nextCard = () => {
-    for (let i = 0; i < deck.length; i++) {
-      setStudyCard(deck[i]);
-    };
-    console.log(studyCard)
-  }
+ 
 
   return (
     <div>
-        <button type="button" onClick={nextCard} />
+        <button onClick={() => console.log("click")}>Click Me</button>
     </div>
   )
 }
