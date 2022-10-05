@@ -9,11 +9,13 @@ import DecksPage from "./components/DecksPage";
 import Deck from "./components/Deck";
 import NewCardForm from "./components/NewCardForm";
 import StudyDeck from "./components/StudyDeck";
+import EditCardForm from "./components/EditCardForm";
 
 export default function App() {
 
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [decks, setDecks] = useState([]);
 
   const loginUser = user => {
     setCurrentUser(user);
@@ -29,6 +31,12 @@ export default function App() {
       });
   }, [])
 
+  useEffect(() => {
+    fetch('/decks')
+      .then(res => res.json())
+      .then(data => setDecks([...data]))
+  }, [])
+
   return (
     <Router>
       <NavBar currentUser={currentUser} />
@@ -37,7 +45,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp loginUser={loginUser} />} />
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
         <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
-        <Route path="/decks" element={<DecksPage />} />
+        <Route path="/decks" element={<DecksPage decks={decks} />} />
         <Route path="/decks/:id" element={<Deck />} />
         <Route path="/cards/new" element={<NewCardForm />} />
         <Route path="/decks/:id/study" element={<StudyDeck />} />
