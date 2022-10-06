@@ -49,6 +49,7 @@ export default function App() {
         <Route path="/decks/:id" element={<Deck />} />
         <Route path="/cards/new" element={<NewCardForm />} />
         <Route path="/decks/:id/study" element={<StudyDeck />} />
+        <Route path="/cards/:id/edit" element={<EditCardForm />} />
       </Routes>
     </Router>
   );
