@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const EditCardForm = () => {
-
-  const [foreignLangTxt, setForeignLangTxt] = useState("");
+const EditCardForm = ({ decks }) => {
+  const [card, setCard] = useState("")
+  const [foreignLangTxt, setForeignLangTxt] = useState(card.foreignLangTxt);
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [deckId, setDeckId] = useState(1);
-  const [decks, setDecks] = useState([]);
+  //const [decks, setDecks] = useState([]);
+
+  console.log(decks)
   
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    fetch("/decks")
+    fetch(`/cards/${id}`)
     .then(res => res.json())
-    .then(data => setDecks(data))
+    .then(data => setCard(data))
   }, []);
 
   const onSubmit = async (e) => {
