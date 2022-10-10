@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NewCardForm = () => {
+const NewCardForm = ({ currentUser }) => {
 
   const [foreignLangTxt, setForeignLangTxt] = useState("");
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState(1);
+  const [deckId, setDeckId] = useState("");
   const [decks, setDecks] = useState([]);
   
   const navigate = useNavigate();
+
+  console.log(currentUser)
 
   useEffect(() => {
     fetch("/decks")
@@ -23,6 +25,7 @@ const NewCardForm = () => {
       foreign_lang_txt: foreignLangTxt,
       primary_lang_txt: primaryLangTxt,
       img_url: imgUrl,
+      created_by: currentUser.id,
       deck_id: parseInt(deckId)
     }
   
