@@ -6,7 +6,7 @@ const EditCardForm = ({ decks }) => {
   const [foreignLangTxt, setForeignLangTxt] = useState(card.foreignLangTxt);
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState(1);
+  const [deckId, setDeckId] = useState(decks[0].id);
   //const [decks, setDecks] = useState([]);
 
   console.log(decks)

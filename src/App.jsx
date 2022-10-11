@@ -34,10 +34,8 @@ export default function App() {
   useEffect(() => {
     fetch('/decks')
       .then(res => res.json())
-      .then(data => setDecks(data))
+      .then(data => setDecks([...data]))
   }, [])
-
-  console.log(currentUser.id)
 
   return (
     <Router>
@@ -49,9 +47,9 @@ export default function App() {
         <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
         <Route path="/decks" element={<DecksPage decks={decks} />} />
         <Route path="/decks/:id" element={<Deck />} />
-        <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} />} />
+        <Route path="/cards/new" element={<NewCardForm decks={decks} />} />
         <Route path="/decks/:id/study" element={<StudyDeck />} />
-        <Route path="/cards/:id/edit" element={<EditCardForm />} />
+        <Route path="/cards/:id/edit" element={<EditCardForm currentUser={currentUser} decks={decks} />} />
       </Routes>
     </Router>
   );
