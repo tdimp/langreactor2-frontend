@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Login = ({ setCurrentUser }) => {
+const Login = ({ loginUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -30,7 +30,7 @@ const Login = ({ setCurrentUser }) => {
 
     const data = await response.json();
     if (response.ok) {
-      setCurrentUser(user);
+      loginUser(user);
       navigate('/');
     } else {
       setErrors(data.error.login)

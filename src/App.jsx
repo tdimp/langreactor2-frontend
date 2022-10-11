@@ -21,6 +21,11 @@ export default function App() {
     setCurrentUser(user);
     setLoggedIn(true);
   };
+  
+  const logoutUser = () => {
+    setCurrentUser("");
+    setLoggedIn(false);
+  }
 
   useEffect(() => {
     fetch('/auth')
@@ -32,10 +37,12 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    fetch('/decks')
+    if (loggedIn) {
+      fetch('/decks')
       .then(res => res.json())
       .then(data => setDecks([...data]))
-  }, [])
+    }
+  }, [currentUser])
 
   return (
     <Router>
@@ -43,8 +50,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} />} />
         <Route path="/signup" element={<SignUp loginUser={loginUser} />} />
-        <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
-        <Route path="/logout" element={<Logout setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />} />
+        <Route path="/login" element={<Login loginUser={loginUser} />} />
+        <Route path="/logout" element={<Logout logoutUser={logoutUser} currentUser={currentUser} />} />
         <Route path="/decks" element={<DecksPage decks={decks} />} />
         <Route path="/decks/:id" element={<Deck />} />
         <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} decks={decks} />} />
