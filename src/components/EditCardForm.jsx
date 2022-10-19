@@ -43,7 +43,7 @@ const EditCardForm = ({ decks }) => {
       alert("Card updated!")
       navigate(`/decks/${deckId}`)
     } else {
-      console.log(data)
+      alert(data.error)
     }
   }
 

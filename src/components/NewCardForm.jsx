@@ -35,7 +35,7 @@ const NewCardForm = ({ currentUser, decks }) => {
       alert("Card created!")
       navigate(`/decks/${deckId}`)
     } else {
-      console.log(data)
+      alert(data.error)
     }
   }
 

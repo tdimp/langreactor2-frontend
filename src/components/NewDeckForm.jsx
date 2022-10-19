@@ -27,7 +27,7 @@ const NewDeckForm = ({ currentUser }) => {
       alert("Deck created!")
       navigate("/decks")
     } else {
-      alert(data)
+      alert(data.error)
     }
   }
   return (
