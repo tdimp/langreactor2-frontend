@@ -2,17 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditCardForm = ({ decks }) => {
-  const [card, setCard] = useState("")
-  const [foreignLangTxt, setForeignLangTxt] = useState(card.foreignLangTxt);
-  const [primaryLangTxt, setPrimaryLangTxt] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState(decks[0].id);
-  //const [decks, setDecks] = useState([]);
-
-  console.log(decks)
-  
-  const navigate = useNavigate();
-  const { id } = useParams();
 
   useEffect(() => {
     fetch(`/cards/${id}`)
@@ -20,6 +9,18 @@ const EditCardForm = ({ decks }) => {
     .then(data => setCard(data))
   }, []);
 
+  const [card, setCard] = useState("")
+  const [foreignLangTxt, setForeignLangTxt] = useState(card.foreign_lang_txt);
+  const [primaryLangTxt, setPrimaryLangTxt] = useState(card.primary_lang_txt);
+  const [imgUrl, setImgUrl] = useState(card.img_url);
+  const [deckId, setDeckId] = useState(decks[0].id);
+
+  console.log(card.foreign_lang_txt)
+  
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+ 
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
@@ -29,8 +30,8 @@ const EditCardForm = ({ decks }) => {
       deck_id: parseInt(deckId)
     }
   
-    const response = await fetch("/cards", {
-      method: "POST", 
+    const response = await fetch(`/cards/${id}`, {
+      method: "PATCH", 
       headers: {
         "Content-Type": "application/json",
       },
@@ -39,11 +40,18 @@ const EditCardForm = ({ decks }) => {
 
     const data = await response.json();
     if (response.ok) {
-      alert("Card created!")
+      alert("Card updated!")
       navigate(`/decks/${deckId}`)
     } else {
       console.log(data)
     }
+  }
+
+  const handleDeleteClick = () => {
+    fetch(`/cards/${id}`, {
+      method: "DELETE",
+    });
+    navigate("/")
   }
 
   return (
@@ -65,6 +73,7 @@ const EditCardForm = ({ decks }) => {
         </select>
         <input type="submit" value="Edit Card" />
       </form>
+      <button onClick={handleDeleteClick}>Delete Card</button>
     </div>
   )
 }
