@@ -7,7 +7,9 @@ const DecksPage = ({ decks }) => {
     <div>
       {decks.map(deck => (
       <Link to={`/decks/${deck.id}`} key={deck.id}>{deck.name}</Link>
-    ))}</div>
+    ))}
+      <Link to={"/decks/new"}>New Deck</Link>
+    </div>
   )
 }
 

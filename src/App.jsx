@@ -8,8 +8,8 @@ import Logout from "./components/Logout";
 import DecksPage from "./components/DecksPage";
 import Deck from "./components/Deck";
 import NewCardForm from "./components/NewCardForm";
-import StudyDeck from "./components/StudyDeck";
 import EditCardForm from "./components/EditCardForm";
+import NewDeckForm from "./components/NewDeckForm";
 
 export default function App() {
 
@@ -42,7 +42,7 @@ export default function App() {
       .then(res => res.json())
       .then(data => setDecks([...data]))
     }
-  }, [currentUser])
+  }, [currentUser, decks])
 
   return (
     <Router>
@@ -55,8 +55,8 @@ export default function App() {
         <Route path="/decks" element={<DecksPage decks={decks} />} />
         <Route path="/decks/:id" element={<Deck />} />
         <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} decks={decks} />} />
-        <Route path="/decks/:id/study" element={<StudyDeck />} />
         <Route path="/cards/:id/edit" element={<EditCardForm currentUser={currentUser} decks={decks} />} />
+        <Route path="/decks/new" element={<NewDeckForm currentUser={currentUser} />} />
       </Routes>
     </Router>
   );
