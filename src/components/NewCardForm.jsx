@@ -18,7 +18,7 @@ const NewCardForm = ({ currentUser, decks }) => {
       foreign_lang_txt: foreignLangTxt,
       primary_lang_txt: primaryLangTxt,
       img_url: imgUrl,
-      created_by: currentUser.id,
+      user_id: currentUser.id,
       deck_id: parseInt(deckId)
     }
   

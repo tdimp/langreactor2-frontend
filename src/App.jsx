@@ -42,7 +42,7 @@ export default function App() {
       .then(res => res.json())
       .then(data => setDecks([...data]))
     }
-  }, [currentUser, decks])
+  }, [currentUser])
 
   return (
     <Router>
