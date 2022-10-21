@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+// I still need to figure out how to update the DeckCard id using this form. Collection? Custom Checkbox component?
+
 const EditCardForm = ({ currentUser, decks }) => {
 
   useEffect(() => {
@@ -12,7 +14,6 @@ const EditCardForm = ({ currentUser, decks }) => {
   const [card, setCard] = useState({});
   const [deckId, setDeckId] = useState("");
 
-  console.log(card.foreign_lang_txt)
   
   const navigate = useNavigate();
   const { id } = useParams();

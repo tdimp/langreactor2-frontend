@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Need to add some checkbox component to allow users to select multiple decks to
+// which the card can be attributed to, to reflect the many-to-many association.
+
 const NewCardForm = ({ currentUser, decks }) => {
 
   const [foreignLangTxt, setForeignLangTxt] = useState("");
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState(decks[0].id);
+  const [deckId, setDeckId] = useState(1);
 
-  //console.log(currentUser)
+  console.log(deckId)
   
   const navigate = useNavigate();
 
@@ -53,7 +56,7 @@ const NewCardForm = ({ currentUser, decks }) => {
         <label>Image URL <br />
         <input type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} />
         </label>
-        <select value={deckId} onChange={(e) => setDeckId(e.target.value)}>
+        <select defaultValue={decks[0].id} onChange={(e) => setDeckId(e.target.value)}>
           {decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
         </select>
         <input type="submit" value="Create Card" />
