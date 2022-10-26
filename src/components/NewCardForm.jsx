@@ -9,7 +9,7 @@ const NewCardForm = ({ currentUser, decks }) => {
   const [foreignLangTxt, setForeignLangTxt] = useState("");
   const [primaryLangTxt, setPrimaryLangTxt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState(1);
+  const [deckId, setDeckId] = useState("");
 
   console.log(deckId)
   

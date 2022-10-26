@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-// I still need to figure out how to update the DeckCard id using this form. Collection? Custom Checkbox component?
+// I still need to figure out how to update the DeckCard id using this form. Pass array of deck_ids to backend using custom Checkbox component?
 
 const EditCardForm = ({ currentUser, decks }) => {
 
@@ -24,7 +24,7 @@ const EditCardForm = ({ currentUser, decks }) => {
     const cardData = {
       ...card,
       user_id: currentUser.id,
-      deck_id: parseInt(deckId)
+      deck_ids: [1, 2]
     }
   
     const response = await fetch(`/cards/${id}`, {
