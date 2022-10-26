@@ -6,23 +6,27 @@ import { useNavigate } from 'react-router-dom';
 
 const NewCardForm = ({ currentUser, decks }) => {
 
-  const [foreignLangTxt, setForeignLangTxt] = useState("");
-  const [primaryLangTxt, setPrimaryLangTxt] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [deckId, setDeckId] = useState("");
-
-  console.log(deckId)
+  const [card, setCard] = useState({});
+  const [deckIds, setDeckIds] = useState([]);
   
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setCard({...card, 
+    [e.target.name]: e.target.value})
+  }
+
+  const handleSelectChange = (e) => {
+    setDeckIds(...e.target.value);
+    console.log(deckIds)
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
-      foreign_lang_txt: foreignLangTxt,
-      primary_lang_txt: primaryLangTxt,
-      img_url: imgUrl,
+      ...card,
       user_id: currentUser.id,
-      deck_id: parseInt(deckId)
+      deck_ids: [1,2] // deck_ids must be an array of valid deck IDs passed to the backend via this component.
     }
   
     const response = await fetch("/cards", {
@@ -36,9 +40,10 @@ const NewCardForm = ({ currentUser, decks }) => {
     const data = await response.json();
     if (response.ok) {
       alert("Card created!")
-      navigate(`/decks/${deckId}`)
+      navigate(`/decks`)
     } else {
       alert(data.error)
+      console.log(cardData)
     }
   }
 
@@ -46,17 +51,17 @@ const NewCardForm = ({ currentUser, decks }) => {
     <div>
       <form onSubmit={onSubmit}>
         <label>Target Language Text* <br />
-        <input type="text" required={true} value={foreignLangTxt} onChange={(e) => setForeignLangTxt(e.target.value)} />
+        <input type="text" name="foreign_lang_txt" required={true} value={card.foreign_lang_txt} onChange={handleChange} />
         </label>
         <br />
         <label>Primary Language Text* <br />
-        <input type="text" required={true} value={primaryLangTxt} onChange={(e) => setPrimaryLangTxt(e.target.value)} />
+        <input type="text" name="primary_lang_txt" required={true} value={card.primary_lang_txt} onChange={handleChange} />
         </label>
         <br />
         <label>Image URL <br />
-        <input type="text" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} />
+        <input type="text" name="img_url" value={card.img_url} onChange={handleChange} />
         </label>
-        <select defaultValue={decks[0].id} onChange={(e) => setDeckId(e.target.value)}>
+        <select defaultValue={decks[0].id} onChange={handleSelectChange}>
           {decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
         </select>
         <input type="submit" value="Create Card" />
