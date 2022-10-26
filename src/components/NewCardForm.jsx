@@ -17,16 +17,22 @@ const NewCardForm = ({ currentUser, decks }) => {
   }
 
   const handleSelectChange = (e) => {
-    setDeckIds(...e.target.value);
-    console.log(deckIds)
+    const deckIdInt = parseInt(e.target.value)
+    if(e.target.checked) {
+      setDeckIds([...deckIds, deckIdInt])
+    } else {
+      setDeckIds(deckIds.filter((deck) => deck.id !== deckIdInt)) // This is not properly filtering the unchecked ids...
+    }
   }
+
+  console.log(deckIds)
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
       ...card,
       user_id: currentUser.id,
-      deck_ids: [1,2] // deck_ids must be an array of valid deck IDs passed to the backend via this component.
+      deck_ids: deckIds // deck_ids must be an array of valid deck IDs passed to the backend via this component.
     }
   
     const response = await fetch("/cards", {
@@ -61,9 +67,21 @@ const NewCardForm = ({ currentUser, decks }) => {
         <label>Image URL <br />
         <input type="text" name="img_url" value={card.img_url} onChange={handleChange} />
         </label>
-        <select defaultValue={decks[0].id} onChange={handleSelectChange}>
-          {decks.map(deck => <option key={deck.id} value={deck.id}>{deck.name}</option>)}
-        </select>
+        <br />
+          {decks.map((deck, index) => {
+            return(
+              <label>
+                <input
+                  type="checkbox"
+                  name="deck_id"
+                  value={deck.id}
+                  onChange={handleSelectChange}
+                />
+                 {deck.name}
+                 <br />
+              </label>
+            );
+          })}
         <input type="submit" value="Create Card" />
       </form>
     </div>
