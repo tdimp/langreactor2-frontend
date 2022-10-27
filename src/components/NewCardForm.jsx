@@ -20,8 +20,6 @@ const NewCardForm = ({ currentUser, decks }) => {
     setDeckIds(deckIdArray);
   }
 
-  console.log(deckIds)
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
