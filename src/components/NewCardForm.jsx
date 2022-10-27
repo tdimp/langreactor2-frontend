@@ -16,7 +16,11 @@ const NewCardForm = ({ currentUser, decks }) => {
   const handleSelectChange = (e) => { // Need to make it a requirement that at least one box is checked.
     let deckIdArray = [...deckIds];
     const deckIdInt = parseInt(e.target.value);
-    e.target.checked ? deckIdArray = [...deckIds, deckIdInt] : deckIdArray.splice(deckIds.indexOf(e.target.value), 1);
+    if(e.target.checked) {
+      deckIdArray = [...deckIds, deckIdInt];
+    } else {
+      deckIdArray.splice(deckIds.indexOf(e.target.value), 1);
+    }
     setDeckIds(deckIdArray);
   }
 
