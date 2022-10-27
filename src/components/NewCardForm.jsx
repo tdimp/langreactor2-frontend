@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Need to add some checkbox component to allow users to select multiple decks to
-// which the card can be attributed to, to reflect the many-to-many association.
-
 const NewCardForm = ({ currentUser, decks }) => {
 
   const [card, setCard] = useState({});
@@ -16,13 +13,11 @@ const NewCardForm = ({ currentUser, decks }) => {
     [e.target.name]: e.target.value})
   }
 
-  const handleSelectChange = (e) => {
-    const deckIdInt = parseInt(e.target.value)
-    if(e.target.checked) {
-      setDeckIds([...deckIds, deckIdInt])
-    } else {
-      setDeckIds(deckIds.filter((deck) => deck.id !== deckIdInt)) // This is not properly filtering the unchecked ids...
-    }
+  const handleSelectChange = (e) => { // Need to make it a requirement that at least one box is checked.
+    let deckIdArray = [...deckIds];
+    const deckIdInt = parseInt(e.target.value);
+    e.target.checked ? deckIdArray = [...deckIds, deckIdInt] : deckIdArray.splice(deckIds.indexOf(e.target.value), 1);
+    setDeckIds(deckIdArray);
   }
 
   console.log(deckIds)
@@ -68,9 +63,9 @@ const NewCardForm = ({ currentUser, decks }) => {
         <input type="text" name="img_url" value={card.img_url} onChange={handleChange} />
         </label>
         <br />
-          {decks.map((deck, index) => {
+          {decks.map((deck) => {
             return(
-              <label>
+              <label key={deck.id}>
                 <input
                   type="checkbox"
                   name="deck_id"
