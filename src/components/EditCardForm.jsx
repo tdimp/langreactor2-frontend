@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-// I still need to figure out how to update the DeckCard id using this form. Pass array of deck_ids to backend using custom Checkbox component?
+// How to set deckIds in state and reflect them in the checkboxes??
 
 const EditCardForm = ({ currentUser, decks }) => {
 
