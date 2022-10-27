@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const NewCardForm = ({ currentUser, decks }) => {
@@ -44,7 +44,6 @@ const NewCardForm = ({ currentUser, decks }) => {
       navigate(`/decks`)
     } else {
       alert(data.error)
-      console.log(cardData)
     }
   }
 
