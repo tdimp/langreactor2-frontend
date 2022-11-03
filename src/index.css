@@ -16,8 +16,14 @@ body {
   color: red;
 }
 
-.flashcard {
-  color: #353552
+.default-card {
+  background-color: #47d198;
+  margin: 10px;
+}
+
+.flipped-card {
+  background-color: bisque;
+  margin: 10px;
 }
 
 code {

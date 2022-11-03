@@ -61,7 +61,7 @@ export default function App() {
 
         <Route path="/cards/new" 
           element={
-            <RequireAuth>
+            <RequireAuth currentUser={currentUser}>
               <NewCardForm currentUser={currentUser} decks={decks} />
             </RequireAuth>
           } 
@@ -69,7 +69,7 @@ export default function App() {
 
         <Route path="/cards/:id/edit" 
           element={
-            <RequireAuth>
+            <RequireAuth currentUser={currentUser}>
               <EditCardForm currentUser={currentUser} decks={decks} />
             </RequireAuth>
           } 
@@ -77,7 +77,7 @@ export default function App() {
 
         <Route path="/decks/new" 
           element={
-            <RequireAuth>
+            <RequireAuth currentUser={currentUser}>
               <NewDeckForm currentUser={currentUser} />
             </RequireAuth>
           } 
