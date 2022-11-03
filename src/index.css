@@ -1,10 +1,23 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: #09092c;
+  color: #cdecf9;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 25px;
+  background-color: rgb(143, 250, 241);
+}
+
+#navbar-header {
+  color: red;
+}
+
+.flashcard {
+  color: #353552
 }
 
 code {

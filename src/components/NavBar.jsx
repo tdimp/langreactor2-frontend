@@ -5,21 +5,19 @@ const NavBar = ({ currentUser }) => {
 
   if(currentUser) {
     return (
-      <div>
-        <h1>{currentUser.username}</h1>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/decks">My Decks</Link></li>
-          <li><Link to="/logout">Logout</Link></li>
-        </ul>
+      <div className="navbar">
+        <h1 id="navbar-header">{currentUser.username}</h1>
+          <Link to="/">Home</Link>
+          <Link to="/decks">My Decks</Link>
+          <Link to="/logout">Logout</Link>
       </div>
     )
   } else {
     return (
-      <ul>
-        <li><Link to="/signup">Sign Up</Link></li>
-        <li><Link to="/login">Log In</Link></li>
-      </ul>
+      <div className="navbar">
+        <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Log In</Link>
+      </div>
     )
   }
 }
