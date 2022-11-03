@@ -13,31 +13,28 @@ import NewDeckForm from "./components/NewDeckForm";
 
 export default function App() {
 
-  const [currentUser, setCurrentUser] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [decks, setDecks] = useState([]);
 
   const loginUser = user => {
     setCurrentUser(user);
-    setLoggedIn(true);
   };
   
   const logoutUser = () => {
-    setCurrentUser("");
-    setLoggedIn(false);
+    setCurrentUser(null);
   }
 
   useEffect(() => {
     fetch('/auth')
       .then(res => {
        if(res.ok){
-         res.json().then(user => loginUser(user));
+         res.json().then(user => setCurrentUser(user));
         }
       });
   }, [])
 
   useEffect(() => {
-    if (loggedIn) {
+    if (currentUser) {
       fetch('/decks')
       .then(res => res.json())
       .then(data => setDecks([...data]))
@@ -49,9 +46,9 @@ export default function App() {
       <NavBar currentUser={currentUser} />
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} />} />
-        <Route path="/signup" element={<SignUp loginUser={loginUser} />} />
-        <Route path="/login" element={<Login loginUser={loginUser} />} />
-        <Route path="/logout" element={<Logout logoutUser={logoutUser} currentUser={currentUser} />} />
+        <Route path="/signup" element={<SignUp loginUser={setCurrentUser} />} />
+        <Route path="/login" element={<Login loginUser={setCurrentUser} />} />
+        <Route path="/logout" element={<Logout logoutUser={setCurrentUser} currentUser={currentUser} />} />
         <Route path="/decks" element={<DecksPage decks={decks} />} />
         <Route path="/decks/:id" element={<Deck />} />
         <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} decks={decks} />} />
