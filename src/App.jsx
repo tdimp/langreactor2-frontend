@@ -17,6 +17,10 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [decks, setDecks] = useState([]);
 
+  const loginUser = (user) => {
+    setCurrentUser(user);
+  }
+
   useEffect(() => {
     fetch('/auth')
       .then(res => {
@@ -24,7 +28,7 @@ export default function App() {
          res.json().then(user => setCurrentUser(user));
         }
       });
-  }, [])
+  }, [currentUser])
 
   useEffect(() => {
     if (currentUser) {
@@ -39,7 +43,7 @@ export default function App() {
       <NavBar currentUser={currentUser} />
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} />} />
-        <Route path="/signup" element={<SignUp loginUser={setCurrentUser} />} />
+        <Route path="/signup" element={<SignUp loginUser={loginUser} />} />
         <Route path="/login" element={<Login loginUser={setCurrentUser} />} />
         <Route path="/logout" element={<Logout logoutUser={setCurrentUser} currentUser={currentUser} />} />
         
