@@ -17,14 +17,6 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [decks, setDecks] = useState([]);
 
-  const loginUser = user => {
-    setCurrentUser(user);
-  };
-  
-  const logoutUser = () => {
-    setCurrentUser(null);
-  }
-
   useEffect(() => {
     fetch('/auth')
       .then(res => {
