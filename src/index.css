@@ -1,6 +1,6 @@
 body {
-  background: #09092c;
-  color: #cdecf9;
+  background: #b4b4b4;
+  color: #2c2d2e;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
@@ -13,17 +13,39 @@ body {
 }
 
 #navbar-header {
-  color: red;
+  color: rgb(124, 40, 40);
 }
 
 .default-card {
-  background-color: #47d198;
+  background-color: #4b04a7;
   margin: 10px;
+  padding: 10px;
+  width: 500px;
 }
 
 .flipped-card {
-  background-color: bisque;
+  background-color: rgb(80, 1, 155);
   margin: 10px;
+  padding: 10px;
+  width: 500px;
+}
+
+.card-text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color:rgb(209, 209, 209)
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 5px;
+  width: 150px; 
+  height: 150px;
 }
 
 code {

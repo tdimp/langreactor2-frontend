@@ -19,7 +19,7 @@ const Card = ({ card }) => {
   return (
     <div className={ isFlipped ? "flipped-card" : "default-card" }>
       <img src={card.img_url} />
-      {isFlipped ? <h1>{card.primary_lang_txt}</h1> : <h1>{card.foreign_lang_txt}</h1>}
+      {isFlipped ? <h1 className='card-text'>{card.primary_lang_txt}</h1> : <h1 className='card-text'>{card.foreign_lang_txt}</h1>}
       <button onClick={handleFlipClick}>Flip!</button>
       <button onClick={handleEditReroute}>Edit Card</button>
     </div>
