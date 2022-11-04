@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import SignUp from './SignUp';
 
 const Login = ({ loginUser }) => {
@@ -10,6 +11,8 @@ const Login = ({ loginUser }) => {
   const handleHasAccountClick = () => {
     setHasAccount(!hasAccount);
   }
+
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ const Login = ({ loginUser }) => {
     const data = await response.json();
     if (response.ok) {
       loginUser(user);
+      navigate("/")
     } else {
       setErrors(data.error.login)
       alert(data.error.login)
