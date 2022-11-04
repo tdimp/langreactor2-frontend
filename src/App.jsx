@@ -9,7 +9,6 @@ import Deck from "./components/Deck";
 import NewCardForm from "./components/NewCardForm";
 import EditCardForm from "./components/EditCardForm";
 import NewDeckForm from "./components/NewDeckForm";
-import RequireAuth from "./components/RequireAuth";
 
 export default function App() {
 
@@ -49,41 +48,15 @@ export default function App() {
         <Route path="/login" element={<Login loginUser={setCurrentUser} />} />
 
         { currentUser ?
-        <>
-          <Route path="/decks" element={ <DecksPage decks={decks} /> } />
-        </> : null }
+          <>
+            <Route path="/decks" element={ <DecksPage decks={decks} /> } />
+            <Route path="/decks/:id" element={<Deck /> } />
+            <Route path="/decks/new" element={<NewDeckForm currentUser={currentUser} /> } />
+            <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} decks={decks} /> } />
+            <Route path="/cards/:id/edit" element={<EditCardForm currentUser={currentUser} decks={decks} /> } />
+          </> : null
+        }
 
-        <Route path="/decks/:id" 
-          element={
-            <RequireAuth currentUser={currentUser}>
-              <Deck />
-            </RequireAuth>
-          } 
-        />
-
-        <Route path="/cards/new" 
-          element={
-            <RequireAuth currentUser={currentUser}>
-              <NewCardForm currentUser={currentUser} decks={decks} />
-            </RequireAuth>
-          } 
-        />
-
-        <Route path="/cards/:id/edit" 
-          element={
-            <RequireAuth currentUser={currentUser}>
-              <EditCardForm currentUser={currentUser} decks={decks} />
-            </RequireAuth>
-          } 
-        />
-
-        <Route path="/decks/new" 
-          element={
-            <RequireAuth currentUser={currentUser}>
-              <NewDeckForm currentUser={currentUser} />
-            </RequireAuth>
-          } 
-        />
       </Routes>
     </Router>
   );
