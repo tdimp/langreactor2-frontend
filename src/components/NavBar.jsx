@@ -1,7 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NavBar = ({ logoutUser, currentUser }) => {
+
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    logoutUser()
+    navigate('/')
+  }
 
   if(currentUser) {
     return (
@@ -9,7 +16,7 @@ const NavBar = ({ logoutUser, currentUser }) => {
         <h1 id="navbar-header">{currentUser.username}</h1>
           <Link to="/">Home</Link>
           <Link to="/decks">My Decks</Link>
-          <Link to="/logout" onClick={logoutUser}>Logout</Link>
+          <Link to="/logout" onClick={handleLogoutClick}>Logout</Link>
       </div>
     )
   } else {
