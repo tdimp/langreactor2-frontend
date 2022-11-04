@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import DecksPage from "./components/DecksPage";
 import Deck from "./components/Deck";
 import NewCardForm from "./components/NewCardForm";
@@ -34,22 +33,25 @@ export default function App() {
     }
   }, [currentUser])
 
+  const handleLogout = () => {
+    fetch("/logout", {
+      method: "DELETE",
+    });
+    setCurrentUser(null);
+  }
+
   return (
     <Router>
-      <NavBar currentUser={currentUser} />
+      <NavBar currentUser={currentUser} logoutUser={handleLogout} />
       <Routes>
         <Route path="/" element={<Home currentUser={currentUser} />} />
         <Route path="/signup" element={<SignUp loginUser={setCurrentUser} />} />
         <Route path="/login" element={<Login loginUser={setCurrentUser} />} />
-        <Route path="/logout" element={<Logout logoutUser={setCurrentUser} currentUser={currentUser} />} />
-        
-        <Route path="/decks" 
-          element={
-            <RequireAuth currentUser={currentUser}>
-              <DecksPage decks={decks} />
-            </RequireAuth>
-            } 
-        />
+
+        { currentUser ?
+        <>
+          <Route path="/decks" element={ <DecksPage decks={decks} /> } />
+        </> : null }
 
         <Route path="/decks/:id" 
           element={

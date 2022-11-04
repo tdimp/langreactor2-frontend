@@ -8,7 +8,7 @@ const EditCardForm = ({ currentUser, decks }) => {
   useEffect(() => {
     fetch(`/cards/${id}`)
     .then(res => res.json())
-    .then(data => setCard(data))
+    .then(data => {setCard(data)})
   }, []);
 
   const [card, setCard] = useState({});
@@ -17,7 +17,6 @@ const EditCardForm = ({ currentUser, decks }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log(card)
   const onSubmit = async (e) => {
     e.preventDefault();
     const cardData = {
@@ -54,7 +53,7 @@ const EditCardForm = ({ currentUser, decks }) => {
     if(e.target.checked) {
       deckIdArray = [...deckIds, deckIdInt];
     } else {
-      deckIdArray.splice(deckIds.indexOf(e.target.value), 1);
+      deckIdArray.splice(deckIds.indexOf(e.target.value), 1); // Could use deckIdArray.filter here, then setDeckIds with new filtered array
     }
     setDeckIds(deckIdArray);
   }
@@ -86,9 +85,10 @@ const EditCardForm = ({ currentUser, decks }) => {
               <label key={deck.id}>
                 <input
                   type="checkbox"
-                  name="deck_id"
+                  name={deck.name}
                   value={deck.id}
                   onChange={handleSelectChange}
+                  //checked={ card.deck_ids.includes(deck.id) ? true : false }
                 />
                  {deck.name}
                  <br />

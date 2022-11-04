@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const NavBar = ({ currentUser }) => {
+const NavBar = ({ logoutUser, currentUser }) => {
 
   if(currentUser) {
     return (
@@ -9,7 +9,7 @@ const NavBar = ({ currentUser }) => {
         <h1 id="navbar-header">{currentUser.username}</h1>
           <Link to="/">Home</Link>
           <Link to="/decks">My Decks</Link>
-          <Link to="/logout">Logout</Link>
+          <Link to="/logout" onClick={logoutUser}>Logout</Link>
       </div>
     )
   } else {
