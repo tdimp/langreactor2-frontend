@@ -52,3 +52,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.link {
+  margin: 10px;
+  padding: 10px;
+}
