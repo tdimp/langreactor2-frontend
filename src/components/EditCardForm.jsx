@@ -6,9 +6,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 const EditCardForm = ({ currentUser, decks }) => {
 
   useEffect(() => {
-    fetch(`/cards/${id}`)
+    try {
+      fetch(`/cards/${id}`)
     .then(res => res.json())
     .then(data => {setCard(data)})
+    } catch (error) {
+        alert(error);
+        navigate('/')
+    }
   }, []);
 
   const [card, setCard] = useState({});
