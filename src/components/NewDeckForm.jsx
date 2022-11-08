@@ -24,8 +24,8 @@ const NewDeckForm = ({ currentUser, handleDeckCreate }) => {
 
     const data = await response.json();
     if (response.ok) {
+      handleDeckCreate(data)
       alert("Deck created!")
-      handleDeckCreate(deckData)
       navigate("/decks")
     } else {
       alert(data.error)

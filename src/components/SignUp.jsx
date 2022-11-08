@@ -40,7 +40,8 @@ const SignUp = ({ loginUser }) => {
         },
         body: JSON.stringify(user),
       })
-      .then(loginUser(user))
+      loginUser(data)
+      console.log(data)
       navigate('/')
     } else {
       setErrors(data.error)
