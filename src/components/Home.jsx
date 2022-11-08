@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+// Can add some type of interactive component here.
 
 const Home = ({ currentUser }) => {
   
