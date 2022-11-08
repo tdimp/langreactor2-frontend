@@ -17,7 +17,7 @@ const SignUp = ({ loginUser }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const user = {
+    let user = {
       username: username,
       password: password,
       primary_language: primaryLanguage
@@ -32,11 +32,19 @@ const SignUp = ({ loginUser }) => {
 
     const data = await response.json();
     if (response.ok) {
-      loginUser(data)
+      user = {username: username, password: password}
+      fetch('/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+      .then(loginUser(user))
       navigate('/')
     } else {
       setErrors(data.error)
-      alert(errors)
+      alert(data.error)
     }      
   }
 

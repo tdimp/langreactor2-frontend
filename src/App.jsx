@@ -26,17 +26,27 @@ export default function App() {
 
   useEffect(() => {
     if (currentUser) {
-      fetch('/decks')
-      .then(res => res.json())
-      .then(data => setDecks([...data]))
+      try {
+        fetch('/decks')
+        .then(res => res.json())
+        .then(data => setDecks([...data])) 
+      } catch (error) {
+          alert(`Oops, something went wrong. ${error}`)
+      }
     }
   }, [currentUser])
 
   const handleLogout = () => {
     fetch("/logout", {
       method: "DELETE",
-    });
-    setCurrentUser(null);
+    })
+    .then(res => {
+      if (res.ok) {
+        setCurrentUser(null);
+        alert("You have successfully logged out.")
+      } else {
+        alert(`Oops. Something went wrong.`)
+      }});
   }
 
   return (
