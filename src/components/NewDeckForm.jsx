@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const NewDeckForm = ({ currentUser }) => {
+const NewDeckForm = ({ currentUser, handleDeckCreate }) => {
 
   const [deckName, setDeckName] = useState("");
 
@@ -25,6 +25,7 @@ const NewDeckForm = ({ currentUser }) => {
     const data = await response.json();
     if (response.ok) {
       alert("Deck created!")
+      handleDeckCreate(deckData)
       navigate("/decks")
     } else {
       alert(data.error)

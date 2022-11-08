@@ -36,6 +36,10 @@ export default function App() {
     }
   }, [currentUser])
 
+  const handleDeckCreate = (newDeck) => {
+    setDecks([...decks, newDeck]);
+  }
+
   const handleLogout = () => {
     fetch("/logout", {
       method: "DELETE",
@@ -61,7 +65,7 @@ export default function App() {
           <>
             <Route path="/decks" element={ <DecksPage decks={decks} /> } />
             <Route path="/decks/:id" element={<Deck /> } />
-            <Route path="/decks/new" element={<NewDeckForm currentUser={currentUser} /> } />
+            <Route path="/decks/new" element={<NewDeckForm currentUser={currentUser} handleDeckCreate={handleDeckCreate} /> } />
             <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} decks={decks} /> } />
             <Route path="/cards/:id/edit" element={<EditCardForm currentUser={currentUser} decks={decks} /> } />
           </> : null
