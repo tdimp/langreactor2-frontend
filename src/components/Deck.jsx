@@ -9,9 +9,13 @@ const Deck = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`/decks/${id}`)
-    .then(res => res.json())
-    .then(cards => setCards(cards))
+    try {
+      fetch(`/decks/${id}`)
+      .then(res => res.json())
+      .then(cards => setCards(cards))
+    } catch (error) {
+        alert(error)
+    }
   }, [])
 
   const routeToCreateCardForm = () => {
