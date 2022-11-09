@@ -32,15 +32,8 @@ const SignUp = ({ loginUser }) => {
 
     const data = await response.json();
     if (response.ok) {
-      fetch('/login', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-      .then(loginUser(data))
-      .then(navigate('/'))
+      loginUser(data)
+      (navigate('/'))
     } else {
       setErrors(data.error)
       alert(data.error)

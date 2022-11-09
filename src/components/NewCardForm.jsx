@@ -26,7 +26,8 @@ const NewCardForm = ({ currentUser, decks }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (deckIds.length = 0) {
+
+    if (deckIds.length == 0) {
       alert("You must select at least one deck.")
     } else {
       const cardData = {

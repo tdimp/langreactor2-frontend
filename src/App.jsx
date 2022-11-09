@@ -26,13 +26,10 @@ export default function App() {
 
   useEffect(() => {
     if (currentUser) {
-      try {
-        fetch('/decks')
-        .then(res => res.json())
-        .then(data => setDecks([...data])) 
-      } catch (error) {
-          alert(`Oops, something went wrong. ${error}`)
-      }
+      fetch('/decks')
+      .then(res => res.json())
+      .then(data => setDecks([...data]))
+      .catch(error => alert(error))
     }
   }, [currentUser])
 
@@ -61,6 +58,7 @@ export default function App() {
         <Route path="/" element={<Home currentUser={currentUser} />} />
         <Route path="/signup" element={<SignUp loginUser={setCurrentUser} />} />
         <Route path="/login" element={<Login loginUser={setCurrentUser} />} />
+        <Route path="logout" />
 
         { currentUser ?
           <>

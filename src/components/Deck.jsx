@@ -7,15 +7,13 @@ const Deck = () => {
   const { id } = useParams();
   
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-    try {
+      console.log(id)
       fetch(`/decks/${id}`)
       .then(res => res.json())
       .then(cards => setCards(cards))
-    } catch (error) {
-        alert(error)
-    }
+      .catch(error => alert(error))
   }, [])
 
   const routeToCreateCardForm = () => {
