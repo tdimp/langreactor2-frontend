@@ -9,7 +9,6 @@ const Deck = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-      console.log(id)
       fetch(`/decks/${id}`)
       .then(res => res.json())
       .then(cards => setCards(cards))

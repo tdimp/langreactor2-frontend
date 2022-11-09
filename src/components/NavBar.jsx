@@ -7,7 +7,9 @@ const NavBar = ({ logoutUser, currentUser }) => {
 
   const handleLogoutClick = () => {
     logoutUser()
-    navigate('/')
+    if (!currentUser) {
+      navigate('/')
+    }
   }
 
   if(currentUser) {
@@ -16,7 +18,7 @@ const NavBar = ({ logoutUser, currentUser }) => {
         <h1 id="navbar-header">{currentUser.username}</h1>
           <Link to="/">Home</Link>
           <Link to="/decks">My Decks</Link>
-          <Link to="/logout" onClick={handleLogoutClick}>Logout</Link>
+          <Link to="/" onClick={handleLogoutClick}>Logout</Link>
       </div>
     )
   } else {

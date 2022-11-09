@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
@@ -58,7 +58,7 @@ export default function App() {
         <Route path="/" element={<Home currentUser={currentUser} />} />
         <Route path="/signup" element={<SignUp loginUser={setCurrentUser} />} />
         <Route path="/login" element={<Login loginUser={setCurrentUser} />} />
-        <Route path="logout" />
+        <Route path="/logout" />
 
         { currentUser ?
           <>

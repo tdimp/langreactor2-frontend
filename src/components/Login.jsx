@@ -31,7 +31,6 @@ const Login = ({ loginUser }) => {
 
     const data = await response.json();
     if (response.ok) {
-      console.log(data)
       loginUser(data);
       navigate("/")
     } else {
