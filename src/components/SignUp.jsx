@@ -37,10 +37,10 @@ const SignUp = ({ loginUser }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(user),
       })
-      loginUser(data)
-      navigate('/')
+      .then(loginUser(data))
+      .then(navigate('/'))
     } else {
       setErrors(data.error)
       alert(data.error)

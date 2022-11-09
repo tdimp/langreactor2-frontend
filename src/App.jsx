@@ -47,6 +47,7 @@ export default function App() {
     .then(res => {
       if (res.ok) {
         setCurrentUser(null);
+        setDecks([]);
         alert("You have successfully logged out.")
       } else {
         alert(`Oops. Something went wrong.`)
