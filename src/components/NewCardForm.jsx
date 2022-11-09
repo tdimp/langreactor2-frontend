@@ -26,26 +26,30 @@ const NewCardForm = ({ currentUser, decks }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const cardData = {
-      ...card,
-      user_id: currentUser.id,
-      deck_ids: deckIds // deck_ids must be an array of valid deck IDs passed to the backend via this component.
-    }
-  
-    const response = await fetch("/cards", {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cardData),
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      alert("Card created!")
-      navigate(`/decks`)
+    if (deckIds.length = 0) {
+      alert("You must select at least one deck.")
     } else {
-      alert(data.error)
+      const cardData = {
+        ...card,
+        user_id: currentUser.id,
+        deck_ids: deckIds // deck_ids must be an array of valid deck IDs passed to the backend via this component.
+      }
+    
+      const response = await fetch("/cards", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cardData),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert("Card created!")
+        navigate(`/decks`)
+      } else {
+        alert(data.error)
+      }
     }
   }
 
