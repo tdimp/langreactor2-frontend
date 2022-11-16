@@ -10,10 +10,16 @@ const Deck = () => {
   
   useEffect(() => {
       fetch(`/decks/${id}`)
-      .then(res => res.json())
-      .then(cards => setCards(cards))
-      .catch(error => alert(error))
-  }, [])
+      .then(res => {
+        if(res.ok) {
+          res.json()
+          .then(cards => setCards(cards));
+        } else {
+          alert("Oops, something went wrong.");
+          navigate('/');
+        }
+      });
+  }, [id])
 
   const routeToCreateCardForm = () => {
     const path = `/cards/new`;
