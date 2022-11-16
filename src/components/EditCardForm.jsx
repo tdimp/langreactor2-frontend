@@ -5,25 +5,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const EditCardForm = ({ currentUser, decks }) => {
 
-  useEffect(() => {
-    try {
-      fetch(`/cards/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setCard(data);
-        setDeckIds(data.deck_ids)
-      });
-    } catch (error) {
-        alert(error);
-        navigate('/')
-    }
-  }, []);
-
+  const { id } = useParams()
+  const navigate = useNavigate();
+  
   const [card, setCard] = useState({});
   const [deckIds, setDeckIds] = useState([]);
 
-  const navigate = useNavigate();
-  const { id } = useParams();
+  useEffect(() => {
+    fetch(`/cards/${id}`)
+    .then(res => {
+      if(res.ok) {
+        res.json()
+        .then(data => {
+          setCard(data);
+          setDeckIds(data.deck_ids);
+        });
+      } else {
+        alert("Oops, something went wrong.");
+        navigate('/');
+      }
+    });
+  }, [id]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
