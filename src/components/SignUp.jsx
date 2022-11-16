@@ -33,7 +33,7 @@ const SignUp = ({ loginUser }) => {
     const data = await response.json();
     if (response.ok) {
       loginUser(data)
-      (navigate('/'))
+      navigate('/')
     } else {
       setErrors(data.error)
       alert(data.error)
