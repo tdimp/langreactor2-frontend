@@ -1,3 +1,9 @@
+# LangReactor Front End (back end repo here: https://github.com/tdimp/langreactor2-backend)
+
+LangReactor is a fullstack language-learning flash card app, where users can create decks of flashcards for studying new languages. The flashcards can be "flipped", where alternative text is displayed, and each card has the option to include an image to help language acquisition.
+
+Once the back end is up and running, a user can create an account and start creating decks and cards! The UI is intuitive and simple to use. What are you waiting for? Start learning today!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
