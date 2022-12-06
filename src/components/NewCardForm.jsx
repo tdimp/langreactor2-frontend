@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const NewCardForm = ({ currentUser, decks }) => {
+const NewCardForm = ({ currentUser, decks, handleAddCard }) => {
 
   const [card, setCard] = useState({});
   const [deckIds, setDeckIds] = useState([]);
@@ -47,7 +47,13 @@ const NewCardForm = ({ currentUser, decks }) => {
       const data = await response.json();
       if (response.ok) {
         alert("Card created!")
-        navigate(`/decks`)
+        handleAddCard(data)
+        setCard({
+          primary_lang_txt: "",
+          foreign_lang_txt: "",
+          img_url: ""
+          })
+          setDeckIds([])
       } else {
         alert(data.error)
       }
@@ -77,6 +83,7 @@ const NewCardForm = ({ currentUser, decks }) => {
                   name="deck_id"
                   value={deck.id}
                   onChange={handleSelectChange}
+                  checked={ deckIds.includes(deck.id) ? true : false }
                 />
                  {deck.name}
                  <br />

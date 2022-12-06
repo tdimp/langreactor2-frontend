@@ -63,7 +63,7 @@ export default function App() {
         { currentUser ?
           <>
             <Route path="/decks" element={ <DecksPage decks={decks} /> } />
-            <Route path="/decks/:id" element={<Deck /> } />
+            <Route path="/decks/:id" element={<Deck decks={decks} currentUser={currentUser} /> } />
             <Route path="/decks/new" element={<NewDeckForm currentUser={currentUser} handleDeckCreate={handleDeckCreate} /> } />
             <Route path="/cards/new" element={<NewCardForm currentUser={currentUser} decks={decks} /> } />
             <Route path="/cards/:id/edit" element={<EditCardForm currentUser={currentUser} decks={decks} /> } />

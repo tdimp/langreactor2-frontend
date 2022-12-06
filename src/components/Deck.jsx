@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Card from './Card';
+import NewCardForm from './NewCardForm';
 
-const Deck = () => {
+const Deck = ({ decks, currentUser }) => {
   const [cards, setCards] = useState([]);
   const { id } = useParams();
   
@@ -26,9 +27,13 @@ const Deck = () => {
     navigate(path);
   };
 
+  const handleAddCard = (newCard) => {
+    setCards([newCard, ...cards])
+  }
+
   return (
     <div>
-      <button onClick={routeToCreateCardForm}>Create New Card</button>
+      <NewCardForm decks={decks} handleAddCard={handleAddCard} currentUser={currentUser}  />
       {cards.map(card => {
         return (
           <Card key={card.id} card={card} />
