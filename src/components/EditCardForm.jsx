@@ -77,7 +77,8 @@ const EditCardForm = ({ currentUser, decks }) => {
     fetch(`/cards/${id}`, {
       method: "DELETE",
     });
-    navigate("/")
+    alert("Card Deleted!")
+    navigate(`/decks/${deckIds[0]}`)
   }
 
   return (
